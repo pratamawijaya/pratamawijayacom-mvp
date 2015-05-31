@@ -13,15 +13,13 @@ public interface iMainView {
      *
      * @param posts
      */
-    public void displayData(List<Post> posts);
+    void displayData(List<Post> posts);
 
-    public void setupView();
+    void setupView();
 
-    public void setupListener();
+    void setupListener();
 
-    public void showLoading();
-
-    public void hideLoading();
+    void showLoading(boolean showLoading);
 
     void onItemTouch(int position);
 }

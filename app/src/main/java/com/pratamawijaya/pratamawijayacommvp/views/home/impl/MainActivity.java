@@ -106,17 +106,16 @@ public class MainActivity extends BaseActivity implements iMainView {
     }
 
     @Override
-    public void showLoading() {
-        recyclerView.setVisibility(View.GONE);
-        loader.setVisibility(View.VISIBLE);
-        LogUtils.Trace("MainActivity", "show loading");
-    }
-
-    @Override
-    public void hideLoading() {
-        recyclerView.setVisibility(View.VISIBLE);
-        loader.setVisibility(View.GONE);
-        LogUtils.Trace("MainActivity", "hide loading");
+    public void showLoading(boolean showLoading) {
+        if (showLoading) {
+            recyclerView.setVisibility(View.GONE);
+            loader.setVisibility(View.VISIBLE);
+            LogUtils.Trace("MainActivity", "show loading");
+        } else {
+            recyclerView.setVisibility(View.VISIBLE);
+            loader.setVisibility(View.GONE);
+            LogUtils.Trace("MainActivity", "hide loading");
+        }
     }
 
     @Override

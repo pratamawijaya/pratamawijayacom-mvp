@@ -33,7 +33,7 @@ public class MainPresenterImpl implements iMainPresenter {
         // load data from server
         // pass to recycler view adapter
         // show loader
-        mView.showLoading();
+        mView.showLoading(true);
         network.getService()
                 .getPosts()
                 .subscribeOn(Schedulers.newThread())
@@ -42,7 +42,7 @@ public class MainPresenterImpl implements iMainPresenter {
                     @Override
                     public void onCompleted() {
                         // hide loader
-                        mView.hideLoading();
+                        mView.showLoading(false);
                     }
 
                     @Override
