@@ -7,7 +7,7 @@
 
     <include layout="@layout/toolbar" />
 
-    <TextView
+    <WebView
         android:id="@+id/txtDetail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />

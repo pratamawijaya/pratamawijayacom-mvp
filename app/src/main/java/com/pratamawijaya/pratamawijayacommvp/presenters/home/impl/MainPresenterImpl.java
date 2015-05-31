@@ -52,10 +52,6 @@ public class MainPresenterImpl implements iMainPresenter {
 
                     @Override
                     public void onNext(ResponsePost responsePost) {
-//                        for (Post data :
-//                                responsePost.getPosts()) {
-//                            LogUtils.Trace("MainActivityPresenster", "data -> " + data.getTitle());
-//                        }
                         mView.displayData(responsePost.getPosts());
                     }
                 });

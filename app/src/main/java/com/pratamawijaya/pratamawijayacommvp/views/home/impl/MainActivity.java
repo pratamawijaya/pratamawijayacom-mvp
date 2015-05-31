@@ -1,5 +1,6 @@
 package com.pratamawijaya.pratamawijayacommvp.views.home.impl;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -11,10 +12,12 @@ import android.widget.ProgressBar;
 
 import com.pratamawijaya.pratamawijayacommvp.R;
 import com.pratamawijaya.pratamawijayacommvp.base.BaseActivity;
+import com.pratamawijaya.pratamawijayacommvp.helper.RecyclerItemClickListener;
 import com.pratamawijaya.pratamawijayacommvp.models.Post;
 import com.pratamawijaya.pratamawijayacommvp.network.NetworkAPI;
 import com.pratamawijaya.pratamawijayacommvp.presenters.home.impl.MainPresenterImpl;
 import com.pratamawijaya.pratamawijayacommvp.utils.LogUtils;
+import com.pratamawijaya.pratamawijayacommvp.views.detail.impl.DetailPostActivity;
 import com.pratamawijaya.pratamawijayacommvp.views.home.adapter.HomeAdapter;
 import com.pratamawijaya.pratamawijayacommvp.views.home.ifaces.iMainView;
 
@@ -35,6 +38,7 @@ public class MainActivity extends BaseActivity implements iMainView {
     private MainPresenterImpl presenter;
     private HomeAdapter adapter;
     private NetworkAPI network;
+    private List<Post> posts;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +50,15 @@ public class MainActivity extends BaseActivity implements iMainView {
         presenter = new MainPresenterImpl(this, network);
         presenter.onCreateView();
         presenter.loadData();
+
+        recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(
+                this,
+                new RecyclerItemClickListener.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(View v, int position) {
+                        onItemTouch(position);
+                    }
+                }));
     }
 
     @Override
@@ -73,6 +86,7 @@ public class MainActivity extends BaseActivity implements iMainView {
     @Override
     public void displayData(List<Post> posts) {
         // adapter notifychanged
+        this.posts = posts;
         adapter = new HomeAdapter(this, posts);
         adapter.notifyDataSetChanged();
         recyclerView.setAdapter(adapter);
@@ -103,5 +117,13 @@ public class MainActivity extends BaseActivity implements iMainView {
         recyclerView.setVisibility(View.VISIBLE);
         loader.setVisibility(View.GONE);
         LogUtils.Trace("MainActivity", "hide loading");
+    }
+
+    @Override
+    public void onItemTouch(int position) {
+        int id = posts.get(position).getId();
+        String title = posts.get(position).getTitle();
+        startActivity(new Intent(this, DetailPostActivity.class).putExtra("id", id)
+                .putExtra("title", title));
     }
 }

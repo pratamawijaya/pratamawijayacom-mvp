@@ -4,8 +4,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.webkit.WebView;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 
 import com.pratamawijaya.pratamawijayacommvp.R;
 import com.pratamawijaya.pratamawijayacommvp.base.BaseActivity;
@@ -25,7 +25,9 @@ public class DetailPostActivity extends BaseActivity implements iDetailPostView 
     @InjectView(R.id.loader)
     ProgressBar loading;
     @InjectView(R.id.txtDetail)
-    TextView txtContent;
+    WebView txtContent;
+    int id;
+    String title;
 
 
     @Override
@@ -36,8 +38,12 @@ public class DetailPostActivity extends BaseActivity implements iDetailPostView 
 
         network = new NetworkAPI();
         presenter = new DetailPostPresenterImpl(this, network);
+        id = getIntent().getIntExtra("id", 0);
+        title = getIntent().getStringExtra("title");
+        presenter.loadDetail(id);
 
-        presenter.loadDetail(1683);
+        getSupportActionBar().setTitle(title);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     @Override
@@ -64,7 +70,7 @@ public class DetailPostActivity extends BaseActivity implements iDetailPostView 
 
     @Override
     public void displayData(String txt) {
-        txtContent.setText("" + txt);
+        txtContent.loadData(txt, "text/html", "UTF-8");
         LogUtils.Trace("DetailPostView", "finish display data");
     }
 

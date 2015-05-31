@@ -1,6 +1,6 @@
 package com.pratamawijaya.pratamawijayacommvp.presenters.detail.impl;
 
-import com.pratamawijaya.pratamawijayacommvp.models.Post;
+import com.pratamawijaya.pratamawijayacommvp.models.ResponsePostDetail;
 import com.pratamawijaya.pratamawijayacommvp.network.NetworkAPI;
 import com.pratamawijaya.pratamawijayacommvp.presenters.detail.ifaces.iDetailPostPresenter;
 import com.pratamawijaya.pratamawijayacommvp.views.detail.ifaces.iDetailPostView;
@@ -29,7 +29,7 @@ public class DetailPostPresenterImpl implements iDetailPostPresenter {
                 .getPost(id)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<Post>() {
+                .subscribe(new Observer<ResponsePostDetail>() {
                     @Override
                     public void onCompleted() {
                         view.showLoading(false);
@@ -41,8 +41,8 @@ public class DetailPostPresenterImpl implements iDetailPostPresenter {
                     }
 
                     @Override
-                    public void onNext(Post post) {
-                        view.displayData(post.getContent());
+                    public void onNext(ResponsePostDetail responsePostDetail) {
+                        view.displayData(responsePostDetail.getPost().getContent());
                     }
                 });
     }

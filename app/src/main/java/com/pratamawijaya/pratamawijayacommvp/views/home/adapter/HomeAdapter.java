@@ -34,6 +34,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeAdapterHol
         return new HomeAdapterHolder(v);
     }
 
+
     @Override
     public void onBindViewHolder(HomeAdapterHolder holder, int position) {
         holder.title.setText("" + posts.get(position).getTitle());

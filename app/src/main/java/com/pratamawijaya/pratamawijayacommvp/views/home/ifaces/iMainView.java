@@ -22,4 +22,6 @@ public interface iMainView {
     public void showLoading();
 
     public void hideLoading();
+
+    void onItemTouch(int position);
 }
