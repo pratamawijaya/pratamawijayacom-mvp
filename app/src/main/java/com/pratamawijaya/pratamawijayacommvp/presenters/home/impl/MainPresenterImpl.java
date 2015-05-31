@@ -28,6 +28,10 @@ public class MainPresenterImpl implements iMainPresenter {
         mView.setupListener();
     }
 
+    /**
+     * from here you can decide from where you want to load data
+     * server or local
+     */
     @Override
     public void loadData() {
         // load data from server
@@ -35,7 +39,7 @@ public class MainPresenterImpl implements iMainPresenter {
         // show loader
         mView.showLoading(true);
         network.getService()
-                .getPosts()
+                .getPosts()// call api
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<ResponsePost>() {
