@@ -1,8 +1,7 @@
-package com.pratamawijaya.pratamawijayacommvp.presenters.home.impl;
+package com.pratamawijaya.pratamawijayacommvp.presenters.home;
 
 import com.pratamawijaya.pratamawijayacommvp.models.ResponsePost;
 import com.pratamawijaya.pratamawijayacommvp.network.NetworkAPI;
-import com.pratamawijaya.pratamawijayacommvp.presenters.home.ifaces.iMainPresenter;
 import com.pratamawijaya.pratamawijayacommvp.views.home.ifaces.iMainView;
 import com.pratamawijaya.pratamawijayacommvp.views.home.impl.MainActivity;
 
@@ -13,16 +12,23 @@ import rx.schedulers.Schedulers;
 /**
  * Created by pratama on 5/30/15.
  */
-public class MainPresenterImpl implements iMainPresenter {
+public class MainPresenter {
+
     private iMainView mView;
     private NetworkAPI network;
 
-    public MainPresenterImpl(MainActivity view, NetworkAPI network) {
-        this.mView = view;
-        this.network = network;
+    public MainPresenter() {
     }
 
-    @Override
+    public MainPresenter(MainActivity view) {
+        this.mView = view;
+        network = new NetworkAPI();
+    }
+
+    public int count(int x, int y) {
+        return x + y;
+    }
+
     public void onCreateView() {
         mView.setupView();
         mView.setupListener();
@@ -32,7 +38,6 @@ public class MainPresenterImpl implements iMainPresenter {
      * from here you can decide from where you want to load data
      * server or local
      */
-    @Override
     public void loadData() {
         // load data from server
         // pass to recycler view adapter

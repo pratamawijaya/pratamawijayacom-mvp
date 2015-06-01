@@ -1,8 +1,7 @@
-package com.pratamawijaya.pratamawijayacommvp.presenters.detail.impl;
+package com.pratamawijaya.pratamawijayacommvp.presenters.detail;
 
 import com.pratamawijaya.pratamawijayacommvp.models.ResponsePostDetail;
 import com.pratamawijaya.pratamawijayacommvp.network.NetworkAPI;
-import com.pratamawijaya.pratamawijayacommvp.presenters.detail.ifaces.iDetailPostPresenter;
 import com.pratamawijaya.pratamawijayacommvp.views.detail.ifaces.iDetailPostView;
 
 import rx.Observer;
@@ -12,17 +11,16 @@ import rx.schedulers.Schedulers;
 /**
  * Created by pratama on 5/31/15.
  */
-public class DetailPostPresenterImpl implements iDetailPostPresenter {
+public class DetailPostPresenter {
 
     private iDetailPostView view;
     private NetworkAPI networkAPI;
 
-    public DetailPostPresenterImpl(iDetailPostView view, NetworkAPI networkAPI) {
+    public DetailPostPresenter(iDetailPostView view, NetworkAPI networkAPI) {
         this.view = view;
         this.networkAPI = networkAPI;
     }
 
-    @Override
     public void loadDetail(int id) {
         view.showLoading(true);
         networkAPI.getService()

@@ -10,7 +10,7 @@ import android.widget.ProgressBar;
 import com.pratamawijaya.pratamawijayacommvp.R;
 import com.pratamawijaya.pratamawijayacommvp.base.BaseActivity;
 import com.pratamawijaya.pratamawijayacommvp.network.NetworkAPI;
-import com.pratamawijaya.pratamawijayacommvp.presenters.detail.impl.DetailPostPresenterImpl;
+import com.pratamawijaya.pratamawijayacommvp.presenters.detail.DetailPostPresenter;
 import com.pratamawijaya.pratamawijayacommvp.utils.LogUtils;
 import com.pratamawijaya.pratamawijayacommvp.views.detail.ifaces.iDetailPostView;
 
@@ -19,7 +19,7 @@ import butterknife.InjectView;
 
 public class DetailPostActivity extends BaseActivity implements iDetailPostView {
 
-    private DetailPostPresenterImpl presenter;
+    private DetailPostPresenter presenter;
     private NetworkAPI network;
 
     @InjectView(R.id.loader)
@@ -37,7 +37,7 @@ public class DetailPostActivity extends BaseActivity implements iDetailPostView 
         ButterKnife.inject(this);
 
         network = new NetworkAPI();
-        presenter = new DetailPostPresenterImpl(this, network);
+        presenter = new DetailPostPresenter(this, network);
         id = getIntent().getIntExtra("id", 0);
         title = getIntent().getStringExtra("title");
         presenter.loadDetail(id);

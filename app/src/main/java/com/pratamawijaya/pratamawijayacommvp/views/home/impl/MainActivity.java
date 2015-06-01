@@ -14,8 +14,7 @@ import com.pratamawijaya.pratamawijayacommvp.R;
 import com.pratamawijaya.pratamawijayacommvp.base.BaseActivity;
 import com.pratamawijaya.pratamawijayacommvp.helper.RecyclerItemClickListener;
 import com.pratamawijaya.pratamawijayacommvp.models.Post;
-import com.pratamawijaya.pratamawijayacommvp.network.NetworkAPI;
-import com.pratamawijaya.pratamawijayacommvp.presenters.home.impl.MainPresenterImpl;
+import com.pratamawijaya.pratamawijayacommvp.presenters.home.MainPresenter;
 import com.pratamawijaya.pratamawijayacommvp.utils.LogUtils;
 import com.pratamawijaya.pratamawijayacommvp.views.detail.impl.DetailPostActivity;
 import com.pratamawijaya.pratamawijayacommvp.views.home.adapter.HomeAdapter;
@@ -35,9 +34,8 @@ public class MainActivity extends BaseActivity implements iMainView {
     @InjectView(R.id.loader)
     ProgressBar loader;
 
-    private MainPresenterImpl presenter;
+    private MainPresenter presenter;
     private HomeAdapter adapter;
-    private NetworkAPI network;
     private List<Post> posts;
 
     @Override
@@ -46,8 +44,7 @@ public class MainActivity extends BaseActivity implements iMainView {
         setContentView(R.layout.activity_main);
         ButterKnife.inject(this);
 
-        network = new NetworkAPI();
-        presenter = new MainPresenterImpl(this, network);
+        presenter = new MainPresenter(this);
         presenter.onCreateView();
         presenter.loadData();
 
