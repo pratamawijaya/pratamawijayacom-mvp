@@ -6,7 +6,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebView;
 import android.widget.ProgressBar;
-
+import butterknife.Bind;
+import butterknife.ButterKnife;
 import com.pratamawijaya.pratamawijayacommvp.R;
 import com.pratamawijaya.pratamawijayacommvp.base.BaseActivity;
 import com.pratamawijaya.pratamawijayacommvp.network.NetworkAPI;
@@ -14,17 +15,14 @@ import com.pratamawijaya.pratamawijayacommvp.presenters.detail.DetailPostPresent
 import com.pratamawijaya.pratamawijayacommvp.utils.LogUtils;
 import com.pratamawijaya.pratamawijayacommvp.views.detail.ifaces.iDetailPostView;
 
-import butterknife.ButterKnife;
-import butterknife.InjectView;
-
 public class DetailPostActivity extends BaseActivity implements iDetailPostView {
 
     private DetailPostPresenter presenter;
     private NetworkAPI network;
 
-    @InjectView(R.id.loader)
+    @Bind(R.id.loader)
     ProgressBar loading;
-    @InjectView(R.id.txtDetail)
+    @Bind(R.id.txtDetail)
     WebView txtContent;
     int id;
     String title;
@@ -34,7 +32,7 @@ public class DetailPostActivity extends BaseActivity implements iDetailPostView 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_post);
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
 
         network = new NetworkAPI();
         presenter = new DetailPostPresenter(this, network);

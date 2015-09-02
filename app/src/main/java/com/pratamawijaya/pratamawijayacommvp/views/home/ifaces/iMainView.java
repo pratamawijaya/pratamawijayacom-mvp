@@ -8,11 +8,6 @@ import java.util.List;
  * Created by pratama on 5/30/15.
  */
 public interface iMainView {
-    /**
-     * display data to view
-     *
-     * @param posts
-     */
     void displayData(List<Post> posts);
 
     void setupView();

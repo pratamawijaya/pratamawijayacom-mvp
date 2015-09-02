@@ -9,7 +9,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
-
+import butterknife.Bind;
+import butterknife.ButterKnife;
 import com.pratamawijaya.pratamawijayacommvp.R;
 import com.pratamawijaya.pratamawijayacommvp.base.BaseActivity;
 import com.pratamawijaya.pratamawijayacommvp.helper.RecyclerItemClickListener;
@@ -19,19 +20,15 @@ import com.pratamawijaya.pratamawijayacommvp.utils.LogUtils;
 import com.pratamawijaya.pratamawijayacommvp.views.detail.impl.DetailPostActivity;
 import com.pratamawijaya.pratamawijayacommvp.views.home.adapter.HomeAdapter;
 import com.pratamawijaya.pratamawijayacommvp.views.home.ifaces.iMainView;
-
 import java.util.List;
-
-import butterknife.ButterKnife;
-import butterknife.InjectView;
 
 public class MainActivity extends BaseActivity implements iMainView {
 
-    @InjectView(R.id.toolbar)
+    @Bind(R.id.toolbar)
     Toolbar toolbar;
-    @InjectView(R.id.recyclerView)
+    @Bind(R.id.recyclerView)
     RecyclerView recyclerView;
-    @InjectView(R.id.loader)
+    @Bind(R.id.loader)
     ProgressBar loader;
 
     private MainPresenter presenter;
@@ -42,7 +39,7 @@ public class MainActivity extends BaseActivity implements iMainView {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
 
         presenter = new MainPresenter(this);
         presenter.onCreateView();

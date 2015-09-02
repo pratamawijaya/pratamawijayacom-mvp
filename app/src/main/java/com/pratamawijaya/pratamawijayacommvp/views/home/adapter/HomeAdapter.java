@@ -6,14 +6,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
+import butterknife.Bind;
+import butterknife.ButterKnife;
 import com.pratamawijaya.pratamawijayacommvp.R;
 import com.pratamawijaya.pratamawijayacommvp.models.Post;
-
 import java.util.List;
-
-import butterknife.ButterKnife;
-import butterknife.InjectView;
 
 /**
  * Created by pratama on 5/31/15.
@@ -46,12 +43,12 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeAdapterHol
     }
 
     public class HomeAdapterHolder extends RecyclerView.ViewHolder {
-        @InjectView(R.id.txtTitle)
+        @Bind(R.id.txtTitle)
         TextView title;
 
         public HomeAdapterHolder(View itemView) {
             super(itemView);
-            ButterKnife.inject(this, itemView);
+            ButterKnife.bind(this, itemView);
         }
     }
 }
